@@ -1,5 +1,6 @@
 import numpy as np
 import streamlit as st
+from utils.builder_tab import render_builder_tab
 
 from core.fock import hom_interference
 from core.physics import check_unitarity, mzi_unitary
@@ -23,7 +24,7 @@ st.set_page_config(page_title="QUANTA-SIM", layout="wide")
 st.title("QUANTA-SIM: Photonic Quantum Circuit Simulator")
 st.write("Real-time photonic interference & quantum logic simulation.")
 
-tab1, tab2 = st.tabs(["Single-Photon MZI", "Two-Photon HOM Effect"])
+tab1, tab2, tab3 = st.tabs(["Single-Photon MZI", "Two-Photon HOM Effect", "Circuit Builder"])
 
 with tab1:
     st.header("Mach-Zehnder Interferometer (MZI)")
@@ -94,3 +95,5 @@ with tab2:
     st.subheader("HOM dip vs photon delay")
     vis = st.slider("Photon indistinguishability (visibility)", 0.0, 1.0, 1.0, 0.01)
     st.pyplot(plot_hom_dip(np.linspace(-3, 3, 300), visibility=vis))
+with tab3:
+    render_builder_tab()
